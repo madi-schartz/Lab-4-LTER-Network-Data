@@ -1,0 +1,53 @@
+---
+title: "Lab 4: LTER Network Data"
+subtitle: 'Ecosystem Science and Sustainability 330'
+author:
+  - name: Madi Schartz
+    email: Mmschartz04@gmail.com
+date: "2025-03-11"
+format: html
+editor: visual 
+---
+
+## Load in necessary libaries 
+```{r}
+remotes::install_github("lter/lterdatasampler")
+
+library(tidyverse)
+library(ggpubr)
+library(lterdatasampler)
+library(car)
+library(visdat)
+
+?and_vertebrates
+```
+
+## Part 1: Univariate and Bivariate Statistics
+
+```{r}
+# View the data structure
+glimpse(and_vertebrates)
+
+vis_dat(and_vertebrates)
+
+# Explore the metadata in the Help pane
+?and_vertebrates
+```
+### Chi-square - Categorical Analysis
+
+```{r}
+# abundance of cutthroat trout code 
+
+and_vertebrates |> 
+  filter(species == "Cutthroat trout") |> 
+  count(unittype)
+
+# remove all NA values 
+
+and_vertebrates |> 
+  filter(species == "Cutthroat trout") |> 
+  drop_na(unittype) |> 
+  count(unittype)
+
+```
+
