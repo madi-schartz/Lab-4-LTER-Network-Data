@@ -3,12 +3,11 @@ title: 'Lab 4: LTER Network Data'
 subtitle: 'Introduction to Statistics in R'
 author:
   - name: Madi Schartz
-    email: Mmschartz04@gmail.com
+    email: "mmschartz04@gmail.com"
 date: "2025-03-11"
-  format: html
-   html:
-    code-fold: true
-    toc: true
+format: html
+execute: 
+  echo: true
 ---
 
 ```{r, include = F}
@@ -22,11 +21,6 @@ knitr::opts_chunk$set(fig.width = 6,
 library(tidyverse)
 ```
 
-```{r}
-#| echo: false
-#| out.width: "100%"
-knitr::include_graphics('images/LTER-Network-Logo-2017.jpg')
-```
 
 This lab will walk us through some basic statistical tests in R, including chi-square, t-tests, and correlation tests. We will use data from the Long-Term Ecological Research (LTER) Network, which is a collaborative effort involving more than 2000 scientists and students investigating ecological processes over long temporal and broad spatial scales. 
 
@@ -691,12 +685,15 @@ In your assignment, you will perform a multiple linear regression using variable
 ```{r}
 # Sites by Latitude
 pie_crab$site <- factor(pie_crab$site, levels = pie_crab |>
-                         arrange(latitude)|>
-                         pull(site))
+                         arrange(latitude) |>
+                         pull(site) |>
+                         unique())  # Ensure unique levels
 
+# Now you can perform the summarization without issues
 pie_crab |>
-  group_by(site)|>
+  group_by(site) |>
   summarise(n_distinct(latitude))
+
 
 # Box plot
 

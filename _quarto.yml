@@ -2,7 +2,6 @@ project:
   title: "Lab 4: LTER Network Data"
   output-dir: docs
   type: website
-
 format:
    html:
     self-contained: true
